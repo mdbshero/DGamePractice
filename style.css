@@ -1,0 +1,15 @@
+body {
+    background: linear-gradient(to right, #3f5efb, #fc466b);
+}
+
+.wrapper {
+    width: 70%;
+    margin: auto;
+    text-align: center;
+}
+
+h1 {
+    margin: 20px;
+    font-size: 6rem;
+    color: rgb(208, 214, 218);
+}
