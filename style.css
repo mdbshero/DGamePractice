@@ -28,3 +28,28 @@ p {
 img {
     width: 320px;
 }
+.shake{
+    animation: shake 0.5s infinite;
+}
+
+@keyframes shake {
+    0%{
+        transform: rotate(8deg);
+    }
+    50%{
+        transform: rotate(-8deg);
+    }
+    100%{
+        transform: rotate(8deg);
+    }
+}
+
+button {
+    background-color: white;
+    border: none;
+    outline: none;
+    color: black;
+    padding: 15px 0;
+    width: 150px;
+    letter-spacing: 1px;
+}
