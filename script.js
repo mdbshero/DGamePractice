@@ -37,10 +37,10 @@ function roll() {
 }
 
 function changeNameOne() {
-  userOne = prompt("Please enter the new name below");
+  userOne = prompt("Please enter the new name below", 'User 1');
   document.querySelectorAll("p")[0].innerHTML = userOne;
 }
 function changeNameTwo() {
-  userTwo = prompt("Please enter the new name below");
+  userTwo = prompt("Please enter the new name below", 'User 2');
   document.querySelectorAll("p")[1].innerHTML = userTwo;
 }
