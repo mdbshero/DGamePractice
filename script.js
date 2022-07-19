@@ -1,10 +1,14 @@
 //First dice random number and image
 
 let dice = document.querySelectorAll("img");
-let userOneWins = 0;
-let userTwoWins = 0;
-let userOne = 'User 1';
-let userTwo = 'User 2';
+const userOne = {
+  name: 'User 1',
+  wins: 0
+}
+const userTwo = {
+  name: 'User 2',
+  wins: 0
+}
 function roll() {
   dice.forEach(function (die) {
     die.classList.add("shake");
@@ -23,13 +27,13 @@ function roll() {
     document.querySelectorAll("img")[1].setAttribute("src", secondDiceImage);
 
     if (firstRandomNum > secondRandomNum) {
-      userOneWins++;
-      document.querySelector("h1").innerHTML = "The Winner is " + userOne + "!";
-      document.querySelectorAll("h4")[0].innerHTML = "Wins: " + userOneWins;
+      userOne.wins++;
+      document.querySelector("h1").innerHTML = "The Winner is " + userOne.name + "!";
+      document.querySelectorAll("h4")[0].innerHTML = "Wins: " + userOne.wins;
     } else if (firstRandomNum < secondRandomNum) {
       userTwoWins++;
-      document.querySelector("h1").innerHTML = "The Winner is " + userTwo + "!";
-      document.querySelectorAll("h4")[1].innerHTML = "Wins: " + userTwoWins;
+      document.querySelector("h1").innerHTML = "The Winner is " + userTwo.name + "!";
+      document.querySelectorAll("h4")[1].innerHTML = "Wins: " + userTwo.wins;
     } else {
       document.querySelector("h1").innerHTML = "Draw!";
     }
@@ -37,10 +41,10 @@ function roll() {
 }
 
 function changeNameOne() {
-  userOne = prompt("Please enter the new name below", 'User 1');
-  document.querySelectorAll("p")[0].innerHTML = userOne;
+  userOne.name = prompt("Please enter the new name below", 'User 1');
+  document.querySelectorAll("p")[0].innerHTML = userOne.name;
 }
 function changeNameTwo() {
-  userTwo = prompt("Please enter the new name below", 'User 2');
-  document.querySelectorAll("p")[1].innerHTML = userTwo;
+  userTwo.name = prompt("Please enter the new name below", 'User 2');
+  document.querySelectorAll("p")[1].innerHTML = userTwo.name;
 }
