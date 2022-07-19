@@ -1,50 +1,134 @@
 //First dice random number and image
 
 let dice = document.querySelectorAll("img");
-const userOne = {
-  name: 'User 1',
-  wins: 0
+let userOne = {
+  name: "User 1",
+  totalScore: 0,
+  roundScore: 0,
+  wins: 0,
+  isTurn: false,
+};
+let userTwo = {
+  name: "User 2",
+  totalScore: 0,
+  roundScore: 0,
+  wins: 0,
+  isTurn: false,
+};
+
+let game = {
+  round: 1,
+  currentPlayer: userOne,
+};
+// function roll() {
+//   dice.forEach(function (die) {
+//     die.classList.add("shake");
+//   });
+//   setTimeout(function () {
+//     dice.forEach(function (die) {
+//       die.classList.remove("shake");
+//     });
+//     const firstRandomNum = Math.floor(Math.random() * 6) + 1;
+//     const firstDiceImage = `assets/dice${firstRandomNum}.png`;
+//     document.querySelectorAll("img")[0].setAttribute("src", firstDiceImage);
+
+//     //Second dice random number and image
+//     const secondRandomNum = Math.floor(Math.random() * 6) + 1;
+//     const secondDiceImage = `assets/dice${secondRandomNum}.png`;
+//     document.querySelectorAll("img")[1].setAttribute("src", secondDiceImage);
+
+//     if (firstRandomNum > secondRandomNum) {
+//       userOne.wins++;
+//       document.querySelector("h1").innerHTML = "The Winner is " + userOne.name + "!";
+//       document.querySelectorAll("h4")[0].innerHTML = "Wins: " + userOne.wins;
+//     } else if (firstRandomNum < secondRandomNum) {
+//       userTwoWins++;
+//       document.querySelector("h1").innerHTML = "The Winner is " + userTwo.name + "!";
+//       document.querySelectorAll("h4")[1].innerHTML = "Wins: " + userTwo.wins;
+//     } else {
+//       document.querySelector("h1").innerHTML = "Draw!";
+//     }
+//   }, 1000);
+// }
+
+function resetPlayerOne() {
+  userOne.round = 0;
+  userOne.totalScore = 0;
+  userOne.isTurn = false;
+  document.querySelectorAll("p")[0].innerHTML = userOne.name;
+  document.querySelectorAll("h4")[0].innerHTML = "Wins: " + userOne.wins;
 }
-const userTwo = {
-  name: 'User 2',
-  wins: 0
+function resetPlayerTwo() {
+  userTwo.round = 0;
+  userTwo.totalScore = 0;
+  userTwo.isTurn = false;
+  document.querySelectorAll("p")[1].innerHTML = userTwo.name;
+  document.querySelectorAll("h4")[1].innerHTML = "Wins: " + userTwo.wins;
+}
+
+function gameStart() {
+  resetPlayerOne();
+  resetPlayerTwo();
+
+  if ((game.currentPlayer = userOne)) {
+    userOne.isTurn = true;
+    userTwo.isTurn = false;
+  } else {
+    userOne.isTurn = false;
+    userTwo.isTurn = true;
+  }
+
+  while (userOne.totalScore < 50 || userTwo.totalScore < 50) {
+    if ((game.currentPlayer = userOne)) {
+    }
+  }
+}
+
+function randomNumberGen() {
+  let rand = Math.floor(Math.random() * 6) + 1;
+  return rand;
 }
 function roll() {
-  dice.forEach(function (die) {
-    die.classList.add("shake");
-  });
-  setTimeout(function () {
-    dice.forEach(function (die) {
-      die.classList.remove("shake");
-    });
-    const firstRandomNum = Math.floor(Math.random() * 6) + 1;
-    const firstDiceImage = `assets/dice${firstRandomNum}.png`;
+  if ((game.currentPlayer === userOne)) {
+    let firstRandomNum = randomNumberGen();
+    let firstDiceImage = `assets/dice${firstRandomNum}.png`;
     document.querySelectorAll("img")[0].setAttribute("src", firstDiceImage);
-
-    //Second dice random number and image
-    const secondRandomNum = Math.floor(Math.random() * 6) + 1;
-    const secondDiceImage = `assets/dice${secondRandomNum}.png`;
-    document.querySelectorAll("img")[1].setAttribute("src", secondDiceImage);
-
-    if (firstRandomNum > secondRandomNum) {
-      userOne.wins++;
-      document.querySelector("h1").innerHTML = "The Winner is " + userOne.name + "!";
-      document.querySelectorAll("h4")[0].innerHTML = "Wins: " + userOne.wins;
-    } else if (firstRandomNum < secondRandomNum) {
-      userTwoWins++;
-      document.querySelector("h1").innerHTML = "The Winner is " + userTwo.name + "!";
-      document.querySelectorAll("h4")[1].innerHTML = "Wins: " + userTwo.wins;
+    if (firstRandomNum === 1) {
+      userOne.roundScore = 0;
+      userOne.totalScore += userOne.roundScore;
+      document.getElementById("userRoundOneScore").innerHTML =
+        "Round Score: " + userOne.roundScore;
+      game.currentPlayer = userTwo;
     } else {
-      document.querySelector("h1").innerHTML = "Draw!";
+      userOne.roundScore += firstRandomNum;
+      console.log(userOne.roundScore);
+      document.getElementById("userRoundOneScore").innerHTML =
+        "Round Score: " + userOne.roundScore;
     }
-  }, 1000);
+  } else if ((game.currentPlayer === userTwo)) {
+    let secondRandomNum = randomNumberGen();
+    let secondDiceImage = `assets/dice${secondRandomNum}.png`;
+    document.querySelectorAll("img")[1].setAttribute("src", secondDiceImage);
+    if (secondRandomNum === 1) {
+      userTwo.roundScore = 0;
+      userTwo.totalScore += userTwo.roundScore;
+      document.getElementById("userRoundTwoScore").innerHTML =
+        "Round Score: " + userTwo.roundScore;
+      game.currentPlayer = userOne;
+    } else {
+      userTwo.roundScore += secondRandomNum;
+      console.log(userTwo.roundScore);
+      document.getElementById("userRoundTwoScore").innerHTML =
+        "Round Score: " + userTwo.roundScore;
+    }
+  }
 }
 
 function changeNameOne() {
-  userOne.name = prompt("Please enter the new name below", 'User 1');
+  userOne.name = prompt("Please enter the new name below", "User 1");
   document.querySelectorAll("p")[0].innerHTML = userOne.name;
 }
 function changeNameTwo() {
-  userTwo.name = prompt("Please enter the new name below", 'User 2');
+  userTwo.name = prompt("Please enter the new name below", "User 2");
   document.querySelectorAll("p")[1].innerHTML = userTwo.name;
 }

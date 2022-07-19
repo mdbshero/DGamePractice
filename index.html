@@ -12,10 +12,14 @@
 <body>
     <div class="wrapper">
         <div>
-            <h1>Press Roll to Begin</h1>
+            <h1>Press Start Game to Begin</h1>
+            <div>
+                <button onclick="gameStart()">Start Game</button>
+            </div>
             <div class="dice-area">
                 <p>User 1</p>
                 <h4>Wins: 0</h4>
+                <h5 id="userRoundOneScore">Round Score: 0</h5>
                 <img src="./assets/dice1.png" />
                 <div>
                     <button onclick="changeNameOne()">Change Name</button>
@@ -24,6 +28,7 @@
             <div class="dice-area">
                 <p>User 2</p>
                 <h4>Wins: 0</h4>
+                <h5 id="userRoundTwoScore">Round Score: 0</h5>
                 <img src="./assets/dice1.png" />
                 <div>
                     <button onclick="changeNameTwo()">Change Name</button>
