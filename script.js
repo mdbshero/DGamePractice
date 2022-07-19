@@ -1,6 +1,7 @@
 //First dice random number and image
 
-let dice = document.querySelectorAll("img");
+let diceOne = document.querySelectorAll("img")[0];
+let diceTwo = document.querySelectorAll("img")[1];
 let userOne = {
   name: "User 1",
   totalScore: 0,
@@ -55,15 +56,21 @@ function resetPlayerOne() {
   userOne.round = 0;
   userOne.totalScore = 0;
   userOne.isTurn = false;
-  document.querySelectorAll("p")[0].innerHTML = userOne.name;
-  document.querySelectorAll("h4")[0].innerHTML = "Wins: " + userOne.wins;
+  document.getElementById("userOneTotal").innerHTML =
+    "Total Score: " + userOne.totalScore;
+  document.getElementById("userOneRoundScore").innerHTML =
+    "Round Score: " + userOne.roundScore;
+  document.getElementById("userOneWins").innerHTML = "Wins: " + userOne.wins;
 }
 function resetPlayerTwo() {
   userTwo.round = 0;
   userTwo.totalScore = 0;
   userTwo.isTurn = false;
-  document.querySelectorAll("p")[1].innerHTML = userTwo.name;
-  document.querySelectorAll("h4")[1].innerHTML = "Wins: " + userTwo.wins;
+  document.getElementById("userTwoTotal").innerHTML =
+    "Total Score: " + userTwo.totalScore;
+  document.getElementById("userTwoRoundScore").innerHTML =
+    "Round Score: " + userTwo.roundScore;
+  document.getElementById("userTwoWins").innerHTML = "Wins: " + userTwo.wins;
 }
 
 function gameStart() {
@@ -77,11 +84,6 @@ function gameStart() {
     userOne.isTurn = false;
     userTwo.isTurn = true;
   }
-
-  while (userOne.totalScore < 50 || userTwo.totalScore < 50) {
-    if ((game.currentPlayer = userOne)) {
-    }
-  }
 }
 
 function randomNumberGen() {
@@ -90,37 +92,45 @@ function randomNumberGen() {
 }
 function roll() {
   if (game.currentPlayer === userOne) {
-    let firstRandomNum = randomNumberGen();
-    let firstDiceImage = `assets/dice${firstRandomNum}.png`;
-    document.querySelectorAll("img")[0].setAttribute("src", firstDiceImage);
-    if (firstRandomNum === 1) {
-      userOne.roundScore = 0;
-      userOne.totalScore += userOne.roundScore;
-      document.getElementById("userOneRoundScore").innerHTML =
-        "Round Score: " + userOne.roundScore;
-      game.currentPlayer = userTwo;
-    } else {
-      userOne.roundScore += firstRandomNum;
-      console.log(userOne.roundScore);
-      document.getElementById("userOneRoundScore").innerHTML =
-        "Round Score: " + userOne.roundScore;
-    }
+    diceOne.classList.add("shake");
+    setTimeout(function () {
+      diceOne.classList.remove("shake");
+      let firstRandomNum = randomNumberGen();
+      let firstDiceImage = `assets/dice${firstRandomNum}.png`;
+      document.querySelectorAll("img")[0].setAttribute("src", firstDiceImage);
+      if (firstRandomNum === 1) {
+        userOne.roundScore = 0;
+        userOne.totalScore += userOne.roundScore;
+        document.getElementById("userOneRoundScore").innerHTML =
+          "Round Score: " + userOne.roundScore;
+        game.currentPlayer = userTwo;
+      } else {
+        userOne.roundScore += firstRandomNum;
+        console.log(userOne.roundScore);
+        document.getElementById("userOneRoundScore").innerHTML =
+          "Round Score: " + userOne.roundScore;
+      }
+    }, 1000);
   } else if (game.currentPlayer === userTwo) {
-    let secondRandomNum = randomNumberGen();
-    let secondDiceImage = `assets/dice${secondRandomNum}.png`;
-    document.querySelectorAll("img")[1].setAttribute("src", secondDiceImage);
-    if (secondRandomNum === 1) {
-      userTwo.roundScore = 0;
-      userTwo.totalScore += userTwo.roundScore;
-      document.getElementById("userTwoRoundScore").innerHTML =
-        "Round Score: " + userTwo.roundScore;
-      game.currentPlayer = userOne;
-    } else {
-      userTwo.roundScore += secondRandomNum;
-      console.log(userTwo.roundScore);
-      document.getElementById("userTwoRoundScore").innerHTML =
-        "Round Score: " + userTwo.roundScore;
-    }
+    diceTwo.classList.add("shake");
+    setTimeout(function () {
+      diceTwo.classList.remove("shake");
+      let secondRandomNum = randomNumberGen();
+      let secondDiceImage = `assets/dice${secondRandomNum}.png`;
+      document.querySelectorAll("img")[1].setAttribute("src", secondDiceImage);
+      if (secondRandomNum === 1) {
+        userTwo.roundScore = 0;
+        userTwo.totalScore += userTwo.roundScore;
+        document.getElementById("userTwoRoundScore").innerHTML =
+          "Round Score: " + userTwo.roundScore;
+        game.currentPlayer = userOne;
+      } else {
+        userTwo.roundScore += secondRandomNum;
+        console.log(userTwo.roundScore);
+        document.getElementById("userTwoRoundScore").innerHTML =
+          "Round Score: " + userTwo.roundScore;
+      }
+    }, 1000);
   }
 }
 
@@ -128,15 +138,37 @@ function hold() {
   if (game.currentPlayer === userOne) {
     userOne.totalScore += userOne.roundScore;
     userOne.roundScore = 0;
-    document.getElementById("userOneTotal").innerHTML = "Total Score: " + userOne.totalScore;
-    document.getElementById("userOneRoundScore").innerHTML = "Round Score: " + userOne.roundScore;
-    game.currentPlayer = userTwo;
+    document.getElementById("userOneTotal").innerHTML =
+      "Total Score: " + userOne.totalScore;
+    document.getElementById("userOneRoundScore").innerHTML =
+      "Round Score: " + userOne.roundScore;
+    if (userOne.totalScore >= 50) {
+      userOne.wins++;
+      document.getElementById("userOneWins").innerHTML =
+        "Wins: " + userOne.wins;
+      resetPlayerOne();
+      resetPlayerTwo();
+      game.currentPlayer = userOne;
+    } else {
+      game.currentPlayer = userTwo;
+    }
   } else {
     userTwo.totalScore += userTwo.roundScore;
     userTwo.roundScore = 0;
-    document.getElementById("userTwoTotal").innerHTML = "Total Score: " + userTwo.totalScore;
-    document.getElementById("userTwoRoundScore").innerHTML = "Round Score: " + userTwo.roundScore;
-    game.currentPlayer = userOne;
+    document.getElementById("userTwoTotal").innerHTML =
+      "Total Score: " + userTwo.totalScore;
+    document.getElementById("userTwoRoundScore").innerHTML =
+      "Round Score: " + userTwo.roundScore;
+    if (userTwo.totalScore >= 50) {
+      userTwo.wins++;
+      document.getElementById("userTwoWins").innerHTML =
+        "Wins: " + userTwo.wins;
+      resetPlayerOne();
+      resetPlayerTwo();
+      game.currentPlayer = userOne;
+    } else {
+      game.currentPlayer = userOne;
+    }
   }
 }
 
