@@ -55,6 +55,7 @@ let game = {
 function resetPlayerOne() {
   userOne.round = 0;
   userOne.totalScore = 0;
+  userOne.roundScore = 0;
   userOne.isTurn = false;
   document.getElementById("userOneTotal").innerHTML =
     "Total Score: " + userOne.totalScore;
@@ -65,6 +66,7 @@ function resetPlayerOne() {
 function resetPlayerTwo() {
   userTwo.round = 0;
   userTwo.totalScore = 0;
+  userTwo.roundScore = 0;
   userTwo.isTurn = false;
   document.getElementById("userTwoTotal").innerHTML =
     "Total Score: " + userTwo.totalScore;
@@ -73,17 +75,9 @@ function resetPlayerTwo() {
   document.getElementById("userTwoWins").innerHTML = "Wins: " + userTwo.wins;
 }
 
-function gameStart() {
+function reset() {
   resetPlayerOne();
   resetPlayerTwo();
-
-  if ((game.currentPlayer = userOne)) {
-    userOne.isTurn = true;
-    userTwo.isTurn = false;
-  } else {
-    userOne.isTurn = false;
-    userTwo.isTurn = true;
-  }
 }
 
 function randomNumberGen() {
