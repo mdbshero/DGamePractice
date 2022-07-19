@@ -3,6 +3,8 @@
 let dice = document.querySelectorAll("img");
 let userOneWins = 0;
 let userTwoWins = 0;
+let userOne = 'User 1';
+let userTwo = 'User 2';
 function roll() {
   dice.forEach(function (die) {
     die.classList.add("shake");
@@ -22,14 +24,23 @@ function roll() {
 
     if (firstRandomNum > secondRandomNum) {
       userOneWins++;
-      document.querySelector("h1").innerHTML = "The Winner is User 1!";
+      document.querySelector("h1").innerHTML = "The Winner is " + userOne + "!";
       document.querySelectorAll("h4")[0].innerHTML = "Wins: " + userOneWins;
     } else if (firstRandomNum < secondRandomNum) {
       userTwoWins++;
-      document.querySelector("h1").innerHTML = "The Winner is User 2!";
+      document.querySelector("h1").innerHTML = "The Winner is " + userTwo + "!";
       document.querySelectorAll("h4")[1].innerHTML = "Wins: " + userTwoWins;
     } else {
       document.querySelector("h1").innerHTML = "Draw!";
     }
   }, 1000);
+}
+
+function changeNameOne() {
+  userOne = prompt("Please enter the new name below");
+  document.querySelectorAll("p")[0].innerHTML = userOne;
+}
+function changeNameTwo() {
+  userTwo = prompt("Please enter the new name below");
+  document.querySelectorAll("p")[1].innerHTML = userTwo;
 }
