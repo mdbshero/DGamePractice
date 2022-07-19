@@ -89,46 +89,62 @@ function randomNumberGen() {
   return rand;
 }
 function roll() {
-  if ((game.currentPlayer === userOne)) {
+  if (game.currentPlayer === userOne) {
     let firstRandomNum = randomNumberGen();
     let firstDiceImage = `assets/dice${firstRandomNum}.png`;
     document.querySelectorAll("img")[0].setAttribute("src", firstDiceImage);
     if (firstRandomNum === 1) {
       userOne.roundScore = 0;
       userOne.totalScore += userOne.roundScore;
-      document.getElementById("userRoundOneScore").innerHTML =
+      document.getElementById("userOneRoundScore").innerHTML =
         "Round Score: " + userOne.roundScore;
       game.currentPlayer = userTwo;
     } else {
       userOne.roundScore += firstRandomNum;
       console.log(userOne.roundScore);
-      document.getElementById("userRoundOneScore").innerHTML =
+      document.getElementById("userOneRoundScore").innerHTML =
         "Round Score: " + userOne.roundScore;
     }
-  } else if ((game.currentPlayer === userTwo)) {
+  } else if (game.currentPlayer === userTwo) {
     let secondRandomNum = randomNumberGen();
     let secondDiceImage = `assets/dice${secondRandomNum}.png`;
     document.querySelectorAll("img")[1].setAttribute("src", secondDiceImage);
     if (secondRandomNum === 1) {
       userTwo.roundScore = 0;
       userTwo.totalScore += userTwo.roundScore;
-      document.getElementById("userRoundTwoScore").innerHTML =
+      document.getElementById("userTwoRoundScore").innerHTML =
         "Round Score: " + userTwo.roundScore;
       game.currentPlayer = userOne;
     } else {
       userTwo.roundScore += secondRandomNum;
       console.log(userTwo.roundScore);
-      document.getElementById("userRoundTwoScore").innerHTML =
+      document.getElementById("userTwoRoundScore").innerHTML =
         "Round Score: " + userTwo.roundScore;
     }
   }
 }
 
+function hold() {
+  if (game.currentPlayer === userOne) {
+    userOne.totalScore += userOne.roundScore;
+    userOne.roundScore = 0;
+    document.getElementById("userOneTotal").innerHTML = "Total Score: " + userOne.totalScore;
+    document.getElementById("userOneRoundScore").innerHTML = "Round Score: " + userOne.roundScore;
+    game.currentPlayer = userTwo;
+  } else {
+    userTwo.totalScore += userTwo.roundScore;
+    userTwo.roundScore = 0;
+    document.getElementById("userTwoTotal").innerHTML = "Total Score: " + userTwo.totalScore;
+    document.getElementById("userTwoRoundScore").innerHTML = "Round Score: " + userTwo.roundScore;
+    game.currentPlayer = userOne;
+  }
+}
+
 function changeNameOne() {
   userOne.name = prompt("Please enter the new name below", "User 1");
-  document.querySelectorAll("p")[0].innerHTML = userOne.name;
+  document.getElementById("userOneName").innerHTML = userOne.name;
 }
 function changeNameTwo() {
   userTwo.name = prompt("Please enter the new name below", "User 2");
-  document.querySelectorAll("p")[1].innerHTML = userTwo.name;
+  document.getElementById("userTwoName").innerHTML = userTwo.name;
 }

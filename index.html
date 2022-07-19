@@ -17,18 +17,20 @@
                 <button onclick="gameStart()">Start Game</button>
             </div>
             <div class="dice-area">
-                <p>User 1</p>
-                <h4>Wins: 0</h4>
-                <h5 id="userRoundOneScore">Round Score: 0</h5>
+                <p id="userOneName">User 1</p>
+                <p id="userOneWins">Wins: 0</p>
+                <p id="userOneTotal">Total Score: 0</p>
+                <p id="userOneRoundScore">Round Score: 0</p>
                 <img src="./assets/dice1.png" />
                 <div>
                     <button onclick="changeNameOne()">Change Name</button>
                 </div>
             </div>
             <div class="dice-area">
-                <p>User 2</p>
-                <h4>Wins: 0</h4>
-                <h5 id="userRoundTwoScore">Round Score: 0</h5>
+                <p id="userTwoName">User 2</p>
+                <p id="userTwoWins">Wins: 0</p>
+                <p id="userTwoTotal">Total Score: 0</p>
+                <p id="userTwoRoundScore">Round Score: 0</p>
                 <img src="./assets/dice1.png" />
                 <div>
                     <button onclick="changeNameTwo()">Change Name</button>
@@ -36,6 +38,7 @@
             </div>
         </div>
         <button onclick="roll()">Roll</button>
+        <button onclick="hold()">Hold</button>
     </div>
 
     <script src="script.js" charset="UTF-8"></script>
